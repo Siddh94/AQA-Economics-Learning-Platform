@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const DashboardController_1 = require("../controllers/DashboardController");
+const auth_1 = require("../utils/auth");
+const router = (0, express_1.Router)();
+const dashboardController = new DashboardController_1.DashboardController();
+router.get('/', auth_1.authenticateToken, dashboardController.getDashboardData.bind(dashboardController));
+router.get('/analytics', auth_1.authenticateToken, dashboardController.getProgressAnalytics.bind(dashboardController));
+exports.default = router;

@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const QuestionController_1 = require("../controllers/QuestionController");
+const auth_1 = require("../utils/auth");
+const router = (0, express_1.Router)();
+const questionController = new QuestionController_1.QuestionController();
+router.get('/', auth_1.authenticateToken, questionController.getQuestions.bind(questionController));
+router.get('/topics', auth_1.authenticateToken, questionController.getTopics.bind(questionController));
+router.get('/session', auth_1.authenticateToken, questionController.getQuestionsForSession.bind(questionController));
+router.post('/', auth_1.authenticateToken, questionController.createQuestion.bind(questionController));
+exports.default = router;
